@@ -16,21 +16,13 @@
 			tooltip: 'Don\'t disable the native document.createTreeWalker (if it exists)'
 		});
 
-		QUnit.config.urlConfig.push({
-			id: 'useMin',
-			label: 'Use minified build',
-			tooltip: 'Use minified build'
-		});
-
 		if (!QUnit.urlParams.useNative) {
 			document.createTreeWalker = undefined;
+			window.NodeFilter = undefined;
+			window.TreeWalker = undefined;
 		}
 
-		if (QUnit.urlParams.useMin) {
-			src = '../dist/TreeWalker-polyfill.min.js';
-		} else {
-			src = '../src/TreeWalker-polyfill.js';
-		}
+		src = '../dist/TreeWalker-polyfill.min.js';
 
 		// Source code
 		document.write( '<script src="' + src + '"><\/script>' );
